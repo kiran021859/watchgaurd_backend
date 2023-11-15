@@ -84,7 +84,7 @@ app.post('/login', async (req, res) => {
                     console.error(err);
                     res.status(500).json('Token generation failed');
                 } else {
-                    res.cookie('token', token, { httpOnly: true, secure: true }); // Set the HttpOnly flag and ensure it's served over HTTPS
+                    res.cookie('token', token, { sameSite: "None", secure: true }) // Set the HttpOnly flag and ensure it's served over HTTPS
                     res.json({
                         id: userDoc._id,
                         username,
@@ -106,6 +106,8 @@ app.post('/login', async (req, res) => {
 
 app.get('/profile', (req, res) => {
     const { token } = req.cookies;
+    const JWT = req.cookies.token
+    console.log(JWT);
     
 
     // Check if the token is not provided
