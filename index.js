@@ -106,6 +106,7 @@ app.post('/login', async (req, res) => {
 
 app.get('/profile', (req, res) => {
     const { token } = req.cookies;
+    console.log(req.cookies);
 
     // Check if the token is not provided
     if (!token) {
