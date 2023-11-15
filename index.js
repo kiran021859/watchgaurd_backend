@@ -66,13 +66,27 @@ app.post('/login', async (req, res) => {
     
 });
 
-app.get('/profile', (req,res) => {
-    const {token} = req.cookies;
-    jwt.verify(token, secret, {}, (err,info)=>{
-        if (err) throw err;
-        res.json(info)
-    })
-})
+app.get('/profile', (req, res) => {
+    const { token } = req.cookies;
+
+    // Check if the token is not provided
+    if (!token) {
+        return res.status(401).json({ error: 'Token not provided' });
+    }
+
+    jwt.verify(token, secret, {}, (err, info) => {
+        if (err) {
+            // Handle token verification failure
+            console.error(err);
+            return res.status(401).json({ error: 'Invalid token' });
+        }
+
+        // Token is valid, send user information
+        res.json(info);
+    });
+});
+
+
 
 app.post('/logout', (req, res) => {
     res.clearCookie('token').json('ok');
