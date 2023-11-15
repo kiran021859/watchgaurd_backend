@@ -44,27 +44,65 @@ app.post('/register', async (req, res) => {
     }
 });
 
-app.post('/login', async (req, res) => {
-    const {username, password} = req.body;
-    const userDoc = await User.findOne({username})
-    const passOk = bcrypt.compareSync(password, userDoc.password);
-    if(passOk){
-        jwt.sign({ username, id: userDoc._id }, secret, {}, (err, token) => {
-            if (err) {
-                console.error(err);
-                res.status(500).json('Token generation failed'); // Token generation failed
-            } else {
-                res.cookie('token', token).json({
-                    id:userDoc._id,
-                    username
-                });
-            }
-        });
-    } else {
-        res.status(400).json('wrong cridentials')
-    }
+// app.post('/login', async (req, res) => {
+//     const {username, password} = req.body;
+//     const userDoc = await User.findOne({username})
+//     const passOk = bcrypt.compareSync(password, userDoc.password);
+//     if(passOk){
+//         jwt.sign({ username, id: userDoc._id }, secret, {}, (err, token) => {
+//             if (err) {
+//                 console.error(err);
+//                 res.status(500).json('Token generation failed'); // Token generation failed
+//             } else {
+//                 res.cookie('token', token).json({
+//                     id:userDoc._id,
+//                     username
+//                 });
+//             }
+//         });
+//     } else {
+//         res.status(400).json('wrong cridentials')
+//     }
     
+// });
+
+app.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+
+    try {
+        const userDoc = await User.findOne({ username });
+
+        if (!userDoc) {
+            return res.status(400).json('Wrong credentials');
+        }
+
+        const passOk = bcrypt.compareSync(password, userDoc.password);
+
+        if (passOk) {
+            jwt.sign({ username, id: userDoc._id }, secret, {}, (err, token) => {
+                if (err) {
+                    console.error(err);
+                    res.status(500).json('Token generation failed');
+                } else {
+                    res.cookie('token', token, { httpOnly: true, secure: true }); // Set the HttpOnly flag and ensure it's served over HTTPS
+                    res.json({
+                        id: userDoc._id,
+                        username,
+                    });
+                }
+            });
+        } else {
+            res.status(400).json('Wrong credentials');
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json('Internal Server Error');
+    }
 });
+
+
+
+
 
 app.get('/profile', (req, res) => {
     const { token } = req.cookies;
