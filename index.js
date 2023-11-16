@@ -20,6 +20,7 @@ const Community = require('./models/communities');
 
 const allowOrigin = [
     'http://localhost:5173',
+    'https://watchguard-younglings.netlify.app'
 ]
 
 
