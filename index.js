@@ -146,7 +146,7 @@ app.post('/postData', uploadMiddleware.single('file'), async (req,res) => {
         title, 
         summary, 
         content,
-        cover:newPath,
+        // cover:newPath,
     })
     res.json(watchPost)
     } catch (e){
