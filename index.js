@@ -18,7 +18,13 @@ const User = require('./models/users');
 const Post = require('./models/post');
 const Community = require('./models/communities');
 
-app.use(cors({credentials:true, origin:'http://localhost:5173'}));
+const allowOrigin = [
+    'http://localhost:5173',
+]
+
+
+
+app.use(cors({credentials:true, origin:allowOrigin}));
 app.use(express.json());
 app.use(cookieParser())
 
