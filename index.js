@@ -107,7 +107,7 @@ app.post('/login', async (req, res) => {
 app.get('/profile', (req, res) => {
     const { token } = req.cookies;
     const JWT = req.cookies.token
-    console.log(JWT);
+    
     
 
     // Check if the token is not provided
@@ -134,11 +134,11 @@ app.post('/logout', (req, res) => {
 });
 
 app.post('/postData', uploadMiddleware.single('file'), async (req,res) => {
-    const {originalname, path} = req.file;
-    const parts = originalname.split('.');
-    const ext = parts[parts.length - 1];
-    const newPath = path+'.'+ext;
-    fs.renameSync(path, newPath );
+    // const {originalname, path} = req.file;
+    // const parts = originalname.split('.');
+    // const ext = parts[parts.length - 1];
+    // const newPath = path+'.'+ext;
+    // fs.renameSync(path, newPath );
 
     const {title, summary, content} = req.body
     try {
