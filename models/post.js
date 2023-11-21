@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
-const {Schema, model} = mongoose
 
-const PostSchema = new Schema({
+
+const PostSchema = new mongoose.Schema({
     title: {type:String},
     summary: {type:String}, 
     content: {type:String},
-    // cover: {type:String},
+    cover: {type:String},
     //author:{type:Schema.Types.ObjectId, ref:'User'},
 
 }, {
     timestamps: true,
 });
 
-module.exports = model('post', PostSchema)
+module.exports = mongoose.model('post', PostSchema)
