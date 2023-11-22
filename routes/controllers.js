@@ -17,22 +17,18 @@ const Comments = require('../models/comments')
 const { execPath } = require('process');
 const asyncWrapper = require('../middleWare/asyncMiddleWare');
 const { createCustomerError } = require('../errors/customError');
+// const Comments = require('../models/comments');
 
 
 
 const RegisterPost = asyncWrapper(async (req, res) => {
-    
     const {username, password} = req.body;
-    try {
         const userDoc = await User.create({
             username,
             password:bcrypt.hashSync(password, salt),
         })
         res.status(200).json({'reasponse':'ok'})
-    } catch (e) {
-        console.log(e);
-        res.status(400).json(e)
-    }
+   
 });
 
 // app.post('/login', async (req, res) => {
@@ -154,10 +150,13 @@ const communityDataGet = (async (req, res) => {
 });
 
 
-const commentsPost = asyncWrapper( async (req, res) => {
+const commentsPost = asyncWrapper( async (req,res) => {
     const {postId, comentText} = req.body
 
-    const comment = await Comments.create({postId, comentText});
+    const comment = await Comments.create({
+        postId,
+        comentText,
+    })
     res.status(200).json({'reasponse':'ok'})
 
     
