@@ -17,7 +17,7 @@ const port = process.env.PORT || 4000
 // const User = require('./models/users');
 // const Post = require('./models/post');
 // const Community = require('./models/communities');
-
+const errorHandle = require('./middleWare/errorHandler')
 const tasks = require('./routes/task')
 
 const allowOrigin = [
@@ -33,7 +33,8 @@ const allowOrigin = [
 app.use(cors({credentials:true, origin:allowOrigin}));
 app.use(express.json());
 app.use(cookieParser())
-
+app.use(express.urlencoded({extended: false}))
+app.use(errorHandle);
 
 //hel
 

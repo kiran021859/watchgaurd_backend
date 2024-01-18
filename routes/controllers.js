@@ -115,19 +115,19 @@ const logoutPost = (req, res) => {
 };
 
 const postDataPost = asyncWrapper( async (req,res) => {
-    
-    const {originalname, path} = req.file;
-    const parts = originalname.split('.');
-    const ext = parts[parts.length - 1];
-    const newPath = path+'.'+ext;
+    ///console.log(req);
+    // const {originalname, path} = req.file;
+    // const parts = originalname.split('.');
+    // const ext = parts[parts.length - 1];
+    // const newPath = path+'.'+ext;
     //fs.renameSync(path, newPath );
-
-    const {title, summary, content} = req.body
+     console.log(req.body);
+    const {Title, Type, Content} = req.body
     const watchPost = await Post.create({
-        title, 
-        summary, 
-        content,
-        cover:newPath,
+        Title, 
+        Type, 
+        Content,
+        //cover:newPath,
     })
     res.status(200).json(watchPost)
     

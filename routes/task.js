@@ -8,7 +8,7 @@ router.route('/register').post(RegisterPost)
 router.route('/login').post(loginPost)
 router.route('/profile').get(profileGet)
 router.route('/logout').post(logoutPost)
-router.route('/postData', uploadMiddleware.single('file')).post(postDataPost).get(postDataGet)
+router.route('/postData').post(postDataPost).get(postDataGet)
 router.route('/communityData').get(communityDataGet)
 router.route('/comments').post(commentsPost)
 
