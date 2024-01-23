@@ -151,11 +151,10 @@ const communityDataGet = (async (req, res) => {
 
 
 const commentsPost = asyncWrapper( async (req,res) => {
-    const {postId, comentText} = req.body
+    const {Comment} = req.body
 
     const comment = await Comments.create({
-        postId,
-        comentText,
+        Comment,
     })
     res.status(200).json({'reasponse':'ok'})
 

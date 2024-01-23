@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const commentsSchema = new mongoose.Schema({
-  postId: String,
-  commentText: String,
+  
+  Comment: String,
 }, {
     timestamps: true,
 });
