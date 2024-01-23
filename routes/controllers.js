@@ -159,6 +159,14 @@ const commentsPost = asyncWrapper( async (req,res) => {
     res.status(200).json({'reasponse':'ok'})
 
     
+});
+
+
+const commentGet = asyncWrapper( async (req,res) => {
+    const comments = await Comments.find();
+    res.json(comments);
+    
 })
 
-module.exports = {RegisterPost, loginPost, profileGet, logoutPost, postDataPost, postDataGet, communityDataGet, commentsPost }
+
+module.exports = {RegisterPost, loginPost, profileGet, logoutPost, postDataPost, postDataGet, communityDataGet, commentsPost, commentGet }
