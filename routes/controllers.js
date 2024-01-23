@@ -151,10 +151,11 @@ const communityDataGet = (async (req, res) => {
 
 
 const commentsPost = asyncWrapper( async (req,res) => {
-    const {Comment} = req.body
-
+    const {Comment, PostId} = req.body
+    console.log(req.body);
     const comment = await Comments.create({
         Comment,
+        PostId
     })
     res.status(200).json({'reasponse':'ok'})
 
@@ -163,6 +164,7 @@ const commentsPost = asyncWrapper( async (req,res) => {
 
 
 const commentGet = asyncWrapper( async (req,res) => {
+    
     const comments = await Comments.find();
     res.json(comments);
     

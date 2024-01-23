@@ -2,7 +2,14 @@ const mongoose = require('mongoose');
 
 const commentsSchema = new mongoose.Schema({
   
-  Comment: String,
+  Comment: {
+    type: String,
+    required: true,
+  },
+  PostId: {
+    type: String,
+    required: true,
+  },
 }, {
     timestamps: true,
 });
