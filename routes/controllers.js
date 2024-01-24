@@ -164,10 +164,13 @@ const commentsPost = asyncWrapper( async (req,res) => {
 
 
 const commentGet = asyncWrapper( async (req,res) => {
-    
-    const comments = await Comments.find();
+
+    const postId = req.query.postId;
+
+    // Now you can use the postId to filter comments based on the associated post
+    const comments = await Comments.find({ PostId: postId });
+
     res.json(comments);
-    
 })
 
 
