@@ -121,7 +121,7 @@ const postDataPost = asyncWrapper( async (req,res) => {
     // const ext = parts[parts.length - 1];
     // const newPath = path+'.'+ext;
     //fs.renameSync(path, newPath );
-     console.log(req.body);
+     
     const {Title, Type, Content} = req.body
     const watchPost = await Post.create({
         Title, 
