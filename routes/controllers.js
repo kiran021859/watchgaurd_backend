@@ -12,6 +12,7 @@ const secret = process.env.SECRET;
 //import user schema
 const User = require('../models/users');
 const Post = require('../models/post');
+const PostAthlone = require('../models/postAthlone');
 const Community = require('../models/communities');
 const Comments = require('../models/comments')
 const { execPath } = require('process');
@@ -141,6 +142,37 @@ const postDataGet = asyncWrapper( async (req,res) => {
     res.json(posts);
 });
 
+
+const creatPostAthlone = asyncWrapper( async (req,res) => {
+    ///console.log(req);
+    // const {originalname, path} = req.file;
+    // const parts = originalname.split('.');
+    // const ext = parts[parts.length - 1];
+    // const newPath = path+'.'+ext;
+    //fs.renameSync(path, newPath );
+     
+    const {Title, Type, Content} = req.body
+    const watchPost = await PostAthlone.create({
+        Title, 
+        Type, 
+        Content,
+        //cover:newPath,
+    })
+    res.status(200).json(watchPost)
+    
+    
+
+    
+});
+
+
+const getPostAthlone = asyncWrapper( async (req,res) => {
+    const posts = await PostAthlone.find();
+    res.json(posts);
+});
+
+
+
 const communityDataGet = (async (req, res) => {
 
     
@@ -152,7 +184,7 @@ const communityDataGet = (async (req, res) => {
 
 const commentsPost = asyncWrapper( async (req,res) => {
     const {Comment, PostId} = req.body
-    console.log(req.body);
+    
     const comment = await Comments.create({
         Comment,
         PostId
@@ -174,4 +206,4 @@ const commentGet = asyncWrapper( async (req,res) => {
 })
 
 
-module.exports = {RegisterPost, loginPost, profileGet, logoutPost, postDataPost, postDataGet, communityDataGet, commentsPost, commentGet }
+module.exports = {getPostAthlone, creatPostAthlone, RegisterPost, loginPost, profileGet, logoutPost, postDataPost, postDataGet, communityDataGet, commentsPost, commentGet }
