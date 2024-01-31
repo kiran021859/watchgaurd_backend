@@ -13,6 +13,10 @@ const secret = process.env.SECRET;
 const User = require('../models/users');
 const Post = require('../models/post');
 const PostAthlone = require('../models/postAthlone');
+const PostBonteheuwel = require('../models/postBonteheuwel');
+const PostManenberg = require('../models/postManenberg');
+const postLanga = require('../models/postLanga');
+const postHanover_park = require('../models/postHanover_park');
 const Community = require('../models/communities');
 const Comments = require('../models/comments')
 const { execPath } = require('process');
@@ -172,6 +176,121 @@ const getPostAthlone = asyncWrapper( async (req,res) => {
 });
 
 
+const creatPostBonteheuwel = asyncWrapper( async (req,res) => {
+    ///console.log(req);
+    // const {originalname, path} = req.file;
+    // const parts = originalname.split('.');
+    // const ext = parts[parts.length - 1];
+    // const newPath = path+'.'+ext;
+    //fs.renameSync(path, newPath );
+     
+    const {Title, Type, Content} = req.body
+    const watchPost = await PostBonteheuwel.create({
+        Title, 
+        Type, 
+        Content,
+        //cover:newPath,
+    })
+    res.status(200).json(watchPost)
+    
+    
+
+    
+});
+
+
+const getPostBonteheuwel = asyncWrapper( async (req,res) => {
+    const posts = await PostBonteheuwel.find();
+    res.json(posts);
+});
+
+
+const creatPostManenberg = asyncWrapper( async (req,res) => {
+    ///console.log(req);
+    // const {originalname, path} = req.file;
+    // const parts = originalname.split('.');
+    // const ext = parts[parts.length - 1];
+    // const newPath = path+'.'+ext;
+    //fs.renameSync(path, newPath );
+     
+    const {Title, Type, Content} = req.body
+    const watchPost = await PostManenberg.create({
+        Title, 
+        Type, 
+        Content,
+        //cover:newPath,
+    })
+    res.status(200).json(watchPost)
+    
+    
+
+    
+});
+
+
+const getPostManenberg = asyncWrapper( async (req,res) => {
+    const posts = await PostManenberg.find();
+    res.json(posts);
+});
+
+
+const creatPostLanga = asyncWrapper( async (req,res) => {
+    ///console.log(req);
+    // const {originalname, path} = req.file;
+    // const parts = originalname.split('.');
+    // const ext = parts[parts.length - 1];
+    // const newPath = path+'.'+ext;
+    //fs.renameSync(path, newPath );
+     
+    const {Title, Type, Content} = req.body
+    const watchPost = await postLanga.create({
+        Title, 
+        Type, 
+        Content,
+        //cover:newPath,
+    })
+    res.status(200).json(watchPost)
+    
+    
+
+    
+});
+
+
+const getPostLanga = asyncWrapper( async (req,res) => {
+    const posts = await postLanga.find();
+    res.json(posts);
+});
+
+
+const creatPostHanover_park = asyncWrapper( async (req,res) => {
+    ///console.log(req);
+    // const {originalname, path} = req.file;
+    // const parts = originalname.split('.');
+    // const ext = parts[parts.length - 1];
+    // const newPath = path+'.'+ext;
+    //fs.renameSync(path, newPath );
+     
+    const {Title, Type, Content} = req.body
+    const watchPost = await postHanover_park.create({
+        Title, 
+        Type, 
+        Content,
+        //cover:newPath,
+    })
+    res.status(200).json(watchPost)
+    
+    
+
+    
+});
+
+
+const getPostHanover_park = asyncWrapper( async (req,res) => {
+    const posts = await postHanover_park.find();
+    res.json(posts);
+});
+
 
 const communityDataGet = (async (req, res) => {
 
@@ -206,4 +325,23 @@ const commentGet = asyncWrapper( async (req,res) => {
 })
 
 
-module.exports = {getPostAthlone, creatPostAthlone, RegisterPost, loginPost, profileGet, logoutPost, postDataPost, postDataGet, communityDataGet, commentsPost, commentGet }
+module.exports = {
+    getPostAthlone, 
+    creatPostAthlone, 
+    RegisterPost, 
+    loginPost, 
+    profileGet, 
+    logoutPost, 
+    postDataPost, 
+    postDataGet, 
+    communityDataGet, 
+    commentsPost, 
+    commentGet,
+    creatPostBonteheuwel,
+    getPostBonteheuwel,
+    creatPostManenberg,
+    getPostManenberg,
+    creatPostLanga,
+    getPostLanga,
+    creatPostHanover_park,
+    getPostHanover_park, }
