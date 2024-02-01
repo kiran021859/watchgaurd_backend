@@ -18,7 +18,6 @@ const PostManenberg = require('../models/postManenberg');
 const postLanga = require('../models/postLanga');
 const postHanover_park = require('../models/postHanover_park');
 const Community = require('../models/communities');
-
 const Comments = require('../models/comments')
 const { execPath } = require('process');
 const asyncWrapper = require('../middleWare/asyncMiddleWare');
